@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "JsonAccess";
+}
+
+<h2>JsonAccess</h2>
+
+<button class="btn btn-info btn-search">search</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>PublishedOn</th>
+            <th>CategoryId</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".btn-search").click(function () {
+                $.getJSON('/api/Articles/1')
+                .done(function (data) {
+                    $('result').empty();
+                    $.each(data, function () {
+                        $('result').append(
+                            $('<tr></tr>')
+                            .append($('<td></td>')).text(this.Id)
+                            .append($('<td></td>')).text(this.Title)
+                            .append($('<td></td>')).text(this.PublishedOn)
+                            .append($('<td></td>')).text(this.CategoryId)
+                            );
+                    });
+                })
+                .fail(function(xhr, status, error){
+                    window.alert("エラー発生 : " + error);
+                });
+                })
+            });
+    </script>
+    }

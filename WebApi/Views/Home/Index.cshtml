@@ -1,0 +1,18 @@
+﻿<input type="button" id="apiButton" class="btn" value="Web Api Test"/>
+
+<script>
+    function asyncCall() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if ((xhr.readyState === 4) && (xhr.status === 200)) {
+                var json = xhr.response;
+                console.log(json);
+            }
+        }
+        xhr.open("GET", "/api/items/1", true);
+        xhr.send(null);
+    }
+
+    var button1 = document.getElementById("apiButton");
+    button1.addEventListener("click", asyncCall, false);
+</script>
